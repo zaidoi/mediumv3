@@ -83,7 +83,7 @@ async function loginController(req, res) {
       });
     }
 
-    const token = await jwt.sign({ id:alreadyExist._id }, process.env.JWT_SECRET);
+    const token = await jwt.sign({ User_id:alreadyExist._id }, process.env.JWT_SECRET);
 
     if (!token) {
       return res.status(400).json({
