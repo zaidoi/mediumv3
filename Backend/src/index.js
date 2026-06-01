@@ -1,9 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express'
+import connectDB from './config/dbConnection';
 
 const app = express()
 
+connectDB()
 
 app.use("/api/user")
 app.use("/api/blog")
