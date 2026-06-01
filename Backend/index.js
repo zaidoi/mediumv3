@@ -5,6 +5,9 @@ import express from 'express'
 const app = express()
 
 
+app.use("/api/user")
+app.use("/api/blog")
+
 
 
 
