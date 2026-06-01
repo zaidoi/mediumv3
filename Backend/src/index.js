@@ -2,13 +2,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express'
 import connectDB from './config/dbConnection.js'
+import userRouter from './routes/user.routes.js';
 
 const app = express()
 
 connectDB()
 
-app.use("/api/user")
-app.use("/api/blog")
+app.use(express.json())
+
+app.use("/api/user",userRouter)
+//app.use("/api/blog")
 
 
 
