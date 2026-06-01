@@ -3,6 +3,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.6.3",
+    "mongoose-type-email": "^1.1.2",
     "zod": "^4.4.3"
   }
 }
