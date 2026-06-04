@@ -12,15 +12,13 @@ async function blogPostController(req, res) {
   }
 
   if (!result.success) {
-    return res.status(400).json({
-      message: "Not Correct Inputs Value",
-    });
+    return res.status(400).json({message:result.error.issues[0].message});
   }
 
   const { title, content } = result.data;
 
   try {
-    const blogCreate = Blog.create({
+    const blogCreate = await Blog.create({
       title: title,
       content: content,
       author: userId,
