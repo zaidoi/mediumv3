@@ -11,10 +11,13 @@ function Login() {
 
   const handleSubmit = async (e, value) => {
     e.preventDefault();
+    const {  email, password } = value;
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_URL}/api/user/login`,
-        value,
+        `${import.meta.env.VITE_URL}/api/user/login`,{
+          email:email,
+          password:password
+        }
       );
       localStorage.setItem("token", res.data.token);
     } catch (error) {

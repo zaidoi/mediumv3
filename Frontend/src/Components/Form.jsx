@@ -47,7 +47,7 @@ function Form({ type, handleSubmit }) {
               className="border-gray-500 outline-none border-r border-l px-2 py-1 rounded"
               required
               onChange={(e) =>
-                setFormDetail({ ...formDetail, username: e.target.value })
+                setFormDetail((prev)=>({ ...prev, username: e.target.value }))
               }
               value={formDetail.username}
             />{" "}
@@ -62,7 +62,7 @@ function Form({ type, handleSubmit }) {
           className="border-gray-500 outline-none border-r border-l px-2 py-1 rounded"
           required
           onChange={(e) =>
-            setFormDetail({ ...formDetail, email: e.target.value })
+            setFormDetail((prev)=>({ ...prev, email: e.target.value }))
           }
           value={formDetail.email}
         />
@@ -75,7 +75,7 @@ function Form({ type, handleSubmit }) {
           className="border-gray-500 outline-none border-r border-l px-2 py-1 rounded"
           required
           onChange={(e) =>
-            setFormDetail({ ...formDetail, password: e.target.value })
+            setFormDetail((prev)=>({ ...prev, password: e.target.value }))
           }
           value={formDetail.password}
         />
