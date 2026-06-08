@@ -1,8 +1,10 @@
 import axios from "axios";
 import Form from "../Components/Form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate()
   const [errorResponse, setErrorResponse] = useState("");
 
   const handleTimer = () => {
@@ -20,6 +22,7 @@ function Login() {
         }
       );
       localStorage.setItem("token", res.data.token);
+      navigate('blogs')
     } catch (error) {
       console.log(error);
       setErrorResponse(error.response.data.message);
