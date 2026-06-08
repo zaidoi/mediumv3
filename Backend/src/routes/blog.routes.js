@@ -11,8 +11,8 @@ import {
 const blogRouter = express.Router();
 
 blogRouter.post("/", tokenValidationMiddleware, blogPostController);
-blogRouter.get("/", tokenValidationMiddleware, blogGetController);
 blogRouter.get("/:id", tokenValidationMiddleware, blogGetWithIdController);
+blogRouter.get("/", tokenValidationMiddleware, blogGetController);
 blogRouter.put("/:id", tokenValidationMiddleware, blogUpdateController);
 blogRouter.delete("/:id", tokenValidationMiddleware, blogDeleteController);
 

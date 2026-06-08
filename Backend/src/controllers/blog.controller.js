@@ -12,7 +12,7 @@ async function blogPostController(req, res) {
   }
 
   if (!result.success) {
-    return res.status(400).json({message:result.error.issues[0].message});
+    return res.status(400).json({ message: result.error.issues[0].message });
   }
 
   const { title, content } = result.data;
@@ -44,7 +44,7 @@ async function blogGetController(req, res) {
   }
 
   try {
-    const allBlog = await Blog.find().populate("author", "name email");
+    const allBlog = await Blog.find().populate("author", "username  email");
 
     res.status(200).json({
       message: "All Blogs",
@@ -72,18 +72,23 @@ async function blogGetWithIdController(req, res) {
   }
 
   try {
-    const blog = await Blog.findOne({ _id: id, author: userId }).populate(
-      "author",
-      "name",
-    );
+    const blog = await Blog.findOne({ _id: id }).populate("author", "username");
+    const isAuthor = blog.author._id.toString() === userId.toString()
     if (!blog) {
       return res.status(400).json({
         message: "Blog not found",
       });
     }
-    res.status(200).json({
-      blog,
-    });
+    if (isAuthor) {
+      res.status(200).json({
+        blog,
+        author: isAuthor,
+      });
+    } else {
+      res.status(200).json({
+        blog,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: error.message,
