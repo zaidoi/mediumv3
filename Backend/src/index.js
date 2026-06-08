@@ -19,6 +19,8 @@ app.use("/api/blog", blogRouter);
 app.use("/api/comment", commentRouter);
 app.use("/api/like", likeRouter);
 
+
+const PORT = process.env.PORT || 3000
 app.listen(3000, () => {
-  console.log("Server is running at PORT 3000");
+  console.log(`Server is running at PORT ${PORT}`);
 });
