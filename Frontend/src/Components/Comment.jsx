@@ -7,7 +7,7 @@ function Comment({ setIsCommentClicked, blogId }) {
   const navigate = useNavigate();
 
   const handleComment = async (value) => {
-    if (!comment) return;
+    
     const token = localStorage.getItem("token");
     if (!token) return navigate("/login");
     try {

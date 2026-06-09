@@ -64,7 +64,7 @@ async function commentGetController(req, res) {
   try {
     const comments = await Comment.find({ blogId: id }).populate(
       "userId",
-      "name",
+      "username",
     );
     res.status(200).json({
       comments,
@@ -106,5 +106,37 @@ async function likeController(req, res) {
   }
 }
 
+async function userLikeCheck(req, res) {
+  const userId = req.userId;
+  if (!userId) {
+    return res.status(400).json({
+      message: "Unauthorized",
+    });
+  }
 
-export {commentPostController,commentGetController,likeController}
+  const id = req.params.id;
+  if (!id) {
+    return res.status(403).json({
+      message: "Id not provided",
+    });
+  }
+
+  try {
+    const likeCheck = await Like.findOne({ blogId: id, userId: userId });
+    if (likeCheck) {
+      return res.json({
+        liked: true,
+      });
+    } else {
+      return res.json({
+        liked: false,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+export { commentPostController, commentGetController, likeController, userLikeCheck };

@@ -4,7 +4,7 @@ import { commentGetController, commentPostController } from '../controllers/feat
 
 const commentRouter = express.Router();
 
-commentRouter.post("/",tokenValidationMiddleware,commentPostController)
+commentRouter.post("/:id",tokenValidationMiddleware,commentPostController)
 commentRouter.get("/:id",tokenValidationMiddleware,commentGetController)
 
 export default commentRouter
