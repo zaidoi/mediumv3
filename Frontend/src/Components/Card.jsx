@@ -1,12 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import { Heart } from "lucide-react";
 import Comment from "./Comment";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Card({ id, author, date, title, content }) {
+  const navigate = useNavigate();
   const [isHeartClicked, setIsHeartClicked] = useState(false);
   const [isCommentClicked, setIsCommentClicked] = useState(false);
+
+  
+  useEffect(() => {
+    const fetchLikedBlogs = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_URL}/api/like/usercheck/${id}`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          },
+        );
+        setIsHeartClicked(res.data.liked)
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+    fetchLikedBlogs()
+  },[id])
+
+  const handleHeartClicked = async (id) => {
+    const token = localStorage.getItem("token");
+    if (!token) return navigate("/login");
+    setIsHeartClicked(!isHeartClicked);
+    try {
+      await axios.get(`${import.meta.env.VITE_URL}/api/like/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
 
   const dateParse = new Date(date).toLocaleDateString("en-GB", {
     month: "long",
@@ -37,13 +75,15 @@ function Card({ id, author, date, title, content }) {
           Comment
         </button>
         <Heart
-          onClick={() => setIsHeartClicked(!isHeartClicked)}
+          onClick={() => {
+            handleHeartClicked(id);
+          }}
           color="red"
           fill={isHeartClicked ? "red" : "none"}
         />
       </div>
       {isCommentClicked ? (
-        <Comment setIsCommentClicked={setIsCommentClicked} />
+        <Comment setIsCommentClicked={setIsCommentClicked} blogId={id} />
       ) : null}
     </div>
   );

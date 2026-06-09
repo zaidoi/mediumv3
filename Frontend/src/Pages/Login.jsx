@@ -22,7 +22,7 @@ function Login() {
         }
       );
       localStorage.setItem("token", res.data.token);
-      navigate('blogs')
+      navigate('/blogs')
     } catch (error) {
       console.log(error);
       setErrorResponse(error.response.data.message);
