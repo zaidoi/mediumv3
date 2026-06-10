@@ -82,7 +82,7 @@ function Form({ type, handleSubmit }) {
         <div className="flex justify-center mt-2">
           <button
             type="submit"
-            className="bg-black text-white py-2 px-5 rounded  hover:bg-gray-700 hover:px-6 hover:py-3"
+            className="bg-black text-white py-2 px-5 rounded  hover:bg-gray-700 hover:px-6 hover:py-3 focus:outline-2 focus:outline-gray-400  focus:outline-offset-2 "
           >
             {type === "signup" ? "Signup" : "Login"}
           </button>

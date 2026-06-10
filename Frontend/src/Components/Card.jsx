@@ -53,39 +53,52 @@ function Card({ id, author, date, title, content }) {
   });
 
   return (
-    <div className=" min-w-sm sm:min-w-3xl max-w-3xl p-3 shadow-2xs flex flex-col gap-2">
-      <div className="flex gap-2 items-center">
-        <Avatar>{author[0].toUpperCase()}</Avatar>
-        <h2 className="font-medium">
-          {author[0].toUpperCase() + author.slice(1)}
-        </h2>
-        <p className="text-gray-500">{dateParse}</p>
-      </div>
-      <div>
-        <Link to={`/blog/${id}`}>
-          <h1 className="font-bold md:text-xl wrap-break-word">{title}</h1>
-        </Link>
-        <p className="font-light md:text-md truncate">{content}</p>
-      </div>
-      <div className="flex gap-2 items-center">
-        <button
-          className="shadow-2xs px-2 py-1 bg-gray-200 rounded"
-          onClick={() => setIsCommentClicked(!isCommentClicked)}
-        >
-          Comment
-        </button>
-        <Heart
-          onClick={() => {
-            handleHeartClicked(id);
-          }}
-          color="red"
-          fill={isHeartClicked ? "red" : "none"}
-        />
-      </div>
-      {isCommentClicked ? (
-        <Comment setIsCommentClicked={setIsCommentClicked} blogId={id} />
-      ) : null}
-    </div>
+    <div className="w-full max-w-3xl p-3 shadow-2xs flex flex-col gap-2 rounded-lg">
+  <div className="flex gap-2 items-center flex-wrap">
+    <Avatar>{author[0].toUpperCase()}</Avatar>
+
+    <h2 className="font-medium break-words">
+      {author[0].toUpperCase() + author.slice(1)}
+    </h2>
+
+    <p className="text-gray-500 text-sm">{dateParse}</p>
+  </div>
+
+  <div>
+    <Link to={`/blog/${id}`}>
+      <h1 className="font-bold text-lg md:text-xl break-words">
+        {title}
+      </h1>
+    </Link>
+
+    <p className="font-light text-sm md:text-base line-clamp-2 break-words">
+      {content}
+    </p>
+  </div>
+
+  <div className="flex gap-3 items-center">
+    <button
+      className="shadow px-3 py-1 bg-gray-200 rounded"
+      onClick={() => setIsCommentClicked(!isCommentClicked)}
+    >
+      Comment
+    </button>
+
+    <Heart
+      onClick={() => handleHeartClicked(id)}
+      color="red"
+      fill={isHeartClicked ? "red" : "none"}
+      className="cursor-pointer shrink-0"
+    />
+  </div>
+
+  {isCommentClicked && (
+    <Comment
+      setIsCommentClicked={setIsCommentClicked}
+      blogId={id}
+    />
+  )}
+</div>
   );
 }
 

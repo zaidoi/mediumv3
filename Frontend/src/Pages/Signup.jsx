@@ -38,7 +38,7 @@ function Signup() {
         )}
       </div>
 
-      <div className=" hidden md:flex  justify-center items-center bg-gray-300 animate-pulse">
+      <div className=" hidden md:flex  justify-center items-center bg-gray-300 animate-pulse sm:px-3">
         <div className="flex flex-col justify-center  w-3xl gap-1">
           <div className="md:text-3xl md:font-semibold">
             "The customer service I received was exceptional. The support team
