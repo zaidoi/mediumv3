@@ -15,7 +15,6 @@ function Login() {
   const handleSubmit = async (e, value) => {
     e.preventDefault();
     const { email, password } = value;
-    setLoadingState(true);
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_URL}/api/user/login`,
@@ -24,6 +23,7 @@ function Login() {
           password: password,
         },
       );
+      setLoadingState(true);
       localStorage.setItem("token", res.data.token);
       navigate("/blogs");
       setLoadingState(false);
