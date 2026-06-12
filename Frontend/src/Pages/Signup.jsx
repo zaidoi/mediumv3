@@ -15,8 +15,8 @@ function Signup() {
   const handleSubmit = async (e, value) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_URL}/api/user/signup`, value);
       setLoadingState(true);
+      await axios.post(`${import.meta.env.VITE_URL}/api/user/signup`, value);
       navigate("/login");
       setLoadingState(false);
     } catch (error) {

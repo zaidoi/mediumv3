@@ -16,6 +16,7 @@ function Login() {
     e.preventDefault();
     const { email, password } = value;
     try {
+      setLoadingState(true);
       const res = await axios.post(
         `${import.meta.env.VITE_URL}/api/user/login`,
         {
@@ -23,13 +24,12 @@ function Login() {
           password: password,
         },
       );
-      setLoadingState(true);
       localStorage.setItem("token", res.data.token);
       navigate("/blogs");
       setLoadingState(false);
     } catch (error) {
-      console.log(error);
-      setErrorResponse(error.response.data.message);
+      setLoadingState(false);
+      setErrorResponse(error.response?.data?.message || "Login failed") ;
       handleTimer();
     }
   };
